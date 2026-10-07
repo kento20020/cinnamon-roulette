@@ -1,0 +1,11 @@
+{
+  "name": "cinnamon-roulette",
+  "version": "1.0.0",
+  "private": true,
+  "description": "できるかできないか、確率はいつでも1/2！？ ふわふわ主人公ルーレット（フロントエンドのみ・GitHub Pages 対応）",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "start": "python3 -m http.server 8000"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>シナモンルーレット</title>
+  <meta name="description" content="できるかできないか、確率はいつでも1/2！？ どんなお題も「できる／できない」で決める、ふわふわ主人公ルーレット。本当の確率もわかるよ。">
+  <meta name="theme-color" content="#8fd3ff">
+  <meta property="og:title" content="シナモンルーレット">
+  <meta property="og:description" content="できるかできないか、確率はいつでも1/2！？ ふわふわ主人公ルーレット">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span><span class="cloud c4"></span>
+  </div>
+
+  <header class="top">
+    <h1 class="logo">
+      <img src="assets/icon.svg" alt="" width="34" height="34">
+      <span>シナモン<b>ルーレット</b></span>
+    </h1>
+    <button class="icon-btn" id="soundBtn" type="button" aria-label="サウンド" aria-pressed="true">
+      <svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+
+  <main class="wrap">
+    <p class="catch">できるか、できないか。<br>確率はいつでも <b>1/2</b>！？</p>
+
+    <section class="card controls" aria-label="お題とモード">
+      <div class="modes" role="group" aria-label="モード">
+        <button type="button" class="mode" data-mode="hero" aria-pressed="true">
+          <b>主人公モード</b><small>なんでも1/2</small>
+        </button>
+        <button type="button" class="mode" data-mode="real" aria-pressed="false">
+          <b>現実モード</b><small>本当の確率で回す</small>
+        </button>
+      </div>
+      <label class="field-label" for="topic">お題</label>
+      <input id="topic" class="field" type="text" maxlength="60" placeholder="例：100兆個のサイコロを投げて全部1になる" autocomplete="off" enterkeyhint="go">
+      <div class="chips" id="presets"></div>
+    </section>
+
+    <section class="stage" aria-label="ルーレット">
+      <div class="wheel-wrap">
+        <div class="pointer" id="pointer" aria-hidden="true">
+          <svg viewBox="0 0 40 44"><path d="M20 42 C10 30 2 22 2 13 A9 9 0 0 1 20 8 A9 9 0 0 1 38 13 C38 22 30 30 20 42 Z" fill="#ff8fb8" stroke="#fff" stroke-width="3"/></svg>
+        </div>
+        <svg id="wheel" class="wheel" viewBox="-160 -160 320 320" role="img" aria-label="できる・できないのルーレット"></svg>
+        <div class="mascot" id="mascot" aria-hidden="true"></div>
+      </div>
+      <p class="odds" id="odds" aria-live="polite"></p>
+      <button type="button" class="spin-btn" id="spinBtn">ルーレットをまわす</button>
+    </section>
+
+    <section id="result" class="result" hidden aria-live="polite"></section>
+
+    <section class="card" aria-labelledby="statsTitle">
+      <h2 id="statsTitle" class="sec-title">これまでの結果</h2>
+      <div class="stats" id="stats"></div>
+      <h3 class="sub-title">さいきん回したお題</h3>
+      <ul class="history" id="history"></ul>
+      <button type="button" class="link-btn" id="resetBtn">記録をリセット</button>
+    </section>
+
+    <section class="card about" aria-labelledby="aboutTitle">
+      <h2 id="aboutTitle" class="sec-title">主人公理論ってなに？</h2>
+      <p>「100兆個のサイコロを投げて全部1になる確率」と「人が壁をすり抜ける確率」、どっちが低い？──そんな話題に<br><b>「できるかできないかの2分の1じゃないん？」</b><br>と答えた、あまりにも主人公すぎる考え方のことです。</p>
+      <p>本当の確率はどちらも「ほぼ0」。でも主人公にとっては、どんなことも「できる」か「できない」かの2択。だからいつでも 1/2 です。</p>
+      <h3 class="sub-title">ちなみに、どっちが低い？</h3>
+      <ul class="facts">
+        <li><b>サイコロ100兆個が全部1：</b>(1/6)の100兆乗 ≒ 10<sup>−77,815,125,038,364</sup></li>
+        <li><b>人が壁をすり抜ける：</b>体重60kg・厚さ10cmの壁で超ざっくり計算すると、およそ 10<sup>−(9×10<sup>33</sup>)</sup></li>
+      </ul>
+      <p>どちらも想像できないほど小さいですが、ざっくり計算では<b>壁すり抜けのほうがケタ違いに起こりにくい</b>という結果になります（壁の計算は仮定しだいで大きく変わります）。</p>
+      <p class="tip">💡 「現実モード」にすると、ルーレットの「できる」ゾーンが本当の確率の大きさになります。サイコロ100兆個だと…見えません。</p>
+    </section>
+
+    <footer class="foot">
+      <p>シナモンルーレットは、ブラウザだけで動くオリジナルの非公式作品です。特定のキャラクターや企業とは関係ありません。結果は乱数（crypto.getRandomValues）で決まり、記録はこのブラウザの中にだけ保存されます。</p>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/logic.js"></script>
+  <script src="assets/js/sound.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
