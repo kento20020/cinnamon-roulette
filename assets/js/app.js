@@ -228,6 +228,15 @@
   /* ---------- 回す ---------- */
   function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
 
+  // ルーレット（針を含む）が画面に入っていなければ、見える位置までスクロールする
+  function showWheel() {
+    const wrap = document.querySelector('.wheel-wrap');
+    const r = wrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    if (r.top >= 0 && r.bottom <= vh) return;
+    wrap.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: r.height + 24 > vh ? 'start' : 'center' });
+  }
+
   function spin() {
     if (spinning) return;
     sound.unlock();
@@ -251,8 +260,9 @@
 
     spinning = true;
     spinBtn.disabled = true;
-    topicEl.disabled = true;
+    topicEl.disabled = true; // 入力中なら、ここでスマホのキーボードも閉じる
     resultEl.hidden = true;
+    showWheel();
     document.body.classList.add('is-spinning');
     setMascot('dizzy', 'まわれ〜！');
     sound.play('start');
@@ -341,7 +351,7 @@
         </div>
       </div>`;
     resultEl.hidden = false;
-    $('againBtn').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: reduceMotion() ? 'auto' : 'smooth' }); spin(); });
+    $('againBtn').addEventListener('click', spin);
     $('shareBtn').addEventListener('click', () => share(text, can));
     setTimeout(() => resultEl.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }), 350);
   }
